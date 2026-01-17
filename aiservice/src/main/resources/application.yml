@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: ai-service
+
+  mongodb:
+#    uri: mongodb://localhost:27017/airecommendationfitness
+#    database: airecommendationfitness
+    uri: mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/?appName=Cluster0/fitness
+    database: fitness
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: activity-processor-group
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: <>
+        spring.json.trusted.packages: "*"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+server:
+  port: 8083
+
+# mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/?appName=Cluster0
