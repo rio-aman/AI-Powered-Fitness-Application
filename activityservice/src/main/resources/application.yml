@@ -8,6 +8,18 @@ spring:
     username: neondb_owner
     password: npg_wGyh5iEUNt3n
 
+# for mongo db connection
+#  data:
+#    mongodb:
+#      uri: mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/?appName=Cluster0/aiactivityfitness
+#      database: aiactivityfitness
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -25,6 +37,8 @@ eureka:
     prefer-ip-address: true
 #    this instance are vey crucial line as might be rest client whatever u use not detect the other service then use this so it fetch through ip address
 
-
+kafka:
+  topic:
+    name: activity-events
 server:
   port: 8082
