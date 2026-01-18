@@ -1,33 +1,5 @@
 spring:
   application:
     name: user-service
-
-  datasource:
-#    this is when docker using for pgAdmin
-
-#    url: jdbc:postgresql://localhost:5432/fitness-micro-user
-#    username: aman
-#    password: aman
-
-#  this is for cloud-based PostgreSql neondb
-    url: jdbc:postgresql://ep-floral-scene-ahef167u-pooler.c-3.us-east-1.aws.neon.tech/fitness-micro-user?sslmode=require&channel_binding=require
-    username: neondb_owner
-    password: npg_wGyh5iEUNt3n
-
-# psql 'postgresql://neondb_owner:npg_wGyh5iEUNt3n@ep-floral-scene-ahef167u-pooler.c-3.us-east-1.aws.neon.tech/fitness-micro-user?sslmode=require&channel_binding=require'
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-
-
-server:
-  port: 8081
+  config:
+    import: optional:configserver:http://localhost:8888
