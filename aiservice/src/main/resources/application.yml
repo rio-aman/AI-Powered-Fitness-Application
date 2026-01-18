@@ -28,6 +28,11 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
+gemini:
+  api:
+    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent
+    key: ${GEMINI_API_KEY}
+
 server:
   port: 8083
 
