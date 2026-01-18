@@ -2,29 +2,40 @@ spring:
   application:
     name: ai-service
 
-  mongodb:
-#    uri: mongodb://localhost:27017/airecommendationfitness
-#    database: airecommendationfitness
-    uri: mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/?appName=Cluster0/fitness
-    database: fitness
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/aifitness
+      database: aifitness
+#      uri: mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/fitness
 
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: activity-processor-group
-      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.use.type.headers: false
-        spring.json.value.default.type: <>
         spring.json.trusted.packages: "*"
+        spring.json.value.default.type: com.fitness.aiservice.model.Activity
+
+kafka:
+  topic:
+    name: activity-events
 
 eureka:
   client:
-    serviceUrl:
+    service-url:
       defaultZone: http://localhost:8761/eureka/
 
 server:
   port: 8083
 
+
+    #  mongodb:
+#    uri: mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/?appName=Cluster0/fitness
+#    database: fitness
+
 # mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/?appName=Cluster0
+#    uri: mongodb://localhost:27017/airecommendationfitness
+#    database: airecommendationfitness

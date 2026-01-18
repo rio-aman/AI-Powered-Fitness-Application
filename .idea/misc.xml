@@ -8,6 +8,8 @@
         <option value="$PROJECT_DIR$/activityservice/pom.xml" />
         <option value="$PROJECT_DIR$/eureka/pom.xml" />
         <option value="$PROJECT_DIR$/aiservice/pom.xml" />
+        <option value="$PROJECT_DIR$/activityservicemongo/pom.xml" />
+        <option value="$PROJECT_DIR$/activityservicepostgres/pom.xml" />
       </list>
     </option>
   </component>
