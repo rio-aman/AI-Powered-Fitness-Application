@@ -6,7 +6,6 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/aifitness
       database: aifitness
-#      uri: mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/fitness
 
   kafka:
     bootstrap-servers: localhost:9092
@@ -36,11 +35,3 @@ gemini:
 server:
   port: 8083
 
-
-    #  mongodb:
-#    uri: mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/?appName=Cluster0/fitness
-#    database: fitness
-
-# mongodb+srv://amprajapati08893:aman840@cluster0.sguxw.mongodb.net/?appName=Cluster0
-#    uri: mongodb://localhost:27017/airecommendationfitness
-#    database: airecommendationfitness
