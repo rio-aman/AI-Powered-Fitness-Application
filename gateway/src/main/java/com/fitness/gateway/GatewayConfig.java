@@ -12,7 +12,7 @@ public class GatewayConfig {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("activity-service", r -> r
-                        .path("/api/activities")
+                        .path("/api/activities/**")
                         .uri("lb://ACTIVITY-SERVICE"))
                 .route("user-service", r -> r
                         .path("/api/users/**")
