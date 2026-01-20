@@ -23,6 +23,13 @@
 
 # these configurations are now in gateway config class in gateway service
 
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8181/realms/fitness-app/protocol/openid-connect/certs
+
 eureka:
   client:
     service-url:
