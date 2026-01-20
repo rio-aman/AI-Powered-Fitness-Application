@@ -16,8 +16,10 @@ spring:
 
 eureka:
   client:
-    serviceUrl:
+    service-url:
       defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
   instance:
     prefer-ip-address: true
 #    this instance are vey crucial line as might be rest client whatever u use not detect the other service then use this so it fetch through ip address

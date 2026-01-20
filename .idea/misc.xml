@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/activityservicemongo/pom.xml" />
         <option value="$PROJECT_DIR$/activityservicepostgres/pom.xml" />
         <option value="$PROJECT_DIR$/configserver/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
       </list>
     </option>
   </component>
