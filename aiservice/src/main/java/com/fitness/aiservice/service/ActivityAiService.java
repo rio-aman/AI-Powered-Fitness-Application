@@ -20,15 +20,15 @@ import java.util.List;
 public class ActivityAiService {
     private final GeminiService geminiService;
 
-    public Recommendation generateRecommendation(Activity activity){
+    public Recommendation generateRecommendation(Activity activity) {
         String prompt = createPromptForActivity(activity);
         String aiResponse = geminiService.getRecommendations(prompt);
-        log.info("Response from AI {}",aiResponse);
+        log.info("Response from AI {}", aiResponse);
         return processAIResponse(activity, aiResponse);
     }
 
     private Recommendation processAIResponse(Activity activity, String aiResponse) {
-        try{
+        try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readTree(aiResponse);
 
@@ -40,7 +40,7 @@ public class ActivityAiService {
                     .path("text");
 
             String jsonContent = textNode.asText()
-                    .replaceAll("```json\\n","")
+                    .replaceAll("```json\\n", "")
                     .replaceAll("\\n```", "")
                     .trim();
 
@@ -141,43 +141,59 @@ public class ActivityAiService {
 
     private String createPromptForActivity(Activity activity) {
         return String.format("""
-        Analyze this fitness activity and provide recommendations in the following EXACT JSON format:
-
-        {
-          "analysis": {
-            "overall": "Overall analysis here",
-            "pace": "Pace analysis here",
-            "heartRate": "Heart rate analysis here",
-            "caloriesBurned": "Calories analysis here"
-          },
-          "improvements": [
-            {
-              "area": "Area name",
-              "recommendation": "Detailed recommendation"
-            }
-          ],
-          "suggestions": [
-            {
-              "workout": "Workout name",
-              "description": "Detailed workout description"
-            }
-          ],
-          "safety": [
-            "Safety point 1",
-            "Safety point 2"
-          ]
-        }
-
-        IMPORTANT RULES:
-        - Return ONLY valid JSON
-        - No markdown, no explanation, no extra text
-
-        Activity Details:
-        Activity Type: %s
-        Duration: %d minutes
-        Calories Burned: %d
-        Additional Metrics: %s
-        """,
+                        Analyze the following fitness activity using evidence-based fitness and exercise science principles.
+                        Your analysis must be DETAILED, practical, and specific to the given activity data.
+                        
+                        Use ONLY the provided information. If any metric is missing, make a realistic assumption and clearly state it within the analysis text.
+                        
+                        Return the response in the EXACT JSON format below.
+                        
+                        {
+                          "analysis": {
+                            "overall": "Detailed multi-sentence summary explaining performance quality, effort level, and overall effectiveness of the activity",
+                            "pace": "Detailed evaluation of pacing consistency, intensity distribution, and whether the pace is appropriate for the activity type and duration",
+                            "heartRate": "Detailed analysis of cardiovascular intensity. If heart rate data is missing, infer intensity based on calories burned and duration and clearly state the assumption",
+                            "caloriesBurned": "Detailed explanation of calorie expenditure efficiency, including whether the burn aligns with activity type, duration, and intensity"
+                          },
+                          "improvements": [
+                            {
+                              "area": "Clearly defined performance area needing improvement",
+                              "recommendation": "Step-by-step, actionable, and measurable improvement strategy with clear reasoning"
+                            }
+                          ],
+                          "suggestions": [
+                            {
+                              "workout": "Specific workout or training method name",
+                              "description": "Detailed explanation of how this workout improves current weaknesses, including intensity, duration, and frequency guidance"
+                            }
+                          ],
+                          "safety": [
+                            "Detailed injury-prevention and form-related safety advice relevant to this activity",
+                            "Clear hydration, recovery, and rest guidance tailored to the activity intensity",
+                            "Consult a qualified doctor or healthcare professional before making significant changes to your fitness routine, especially if you have pre-existing medical conditions, injuries, dizziness, pain, or unusual fatigue"
+                          ]
+                        }
+                        
+                        STRICT RULES:
+                          - Use simple, clear words that anyone can understand
+                          - Output ONLY valid JSON
+                          - No markdown
+                          - No explanations outside JSON
+                          - Every analysis field MUST contain multiple sentences
+                          - Recommendations must be practical, realistic, and safe
+                          - Safety section MUST always include a doctor or healthcare consultation recommendation, clearly stated in simple words
+                          - Do NOT repeat the input values verbatim
+                          - Do NOT provide medical diagnoses
+                          - Avoid technical jargon; explain concepts in everyday language
+                          - Ensure the response is easy to read and follow for all users
+                        
+                        
+                        Activity Details:
+                        Activity Type: %s
+                        Duration: %d minutes
+                        Calories Burned: %d
+                        Additional Metrics (JSON or text): %s
+                        """,
                 activity.getType(),
                 activity.getDuration(),
                 activity.getCaloriesBurned(),

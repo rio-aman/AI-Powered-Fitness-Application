@@ -37,7 +37,7 @@ const ActivityList = () => {
             }}
             onClick={() => navigate(`/activities/${activity.id}`)}
           >
-            <CardContent>
+            <CardContent sx={{backgroundColor: '#c7f783'}}>
               <Typography variant="h6" fontWeight={600} gutterBottom>
                 {activity.type}
               </Typography>
