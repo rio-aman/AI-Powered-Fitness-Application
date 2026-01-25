@@ -27,15 +27,13 @@ const ActivityDetail = () => {
     return <Typography>Loading...</Typography>;
   }
   return (
-    <Box sx={{ maxWidth: 800, mx: "auto", p: 2 }}>
+    <Box sx={{ maxWidth: 800, mx: "auto", p: 2, backgroundColor: "#06c3f7" }}>
       <Card sx={{ mb: 2 }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>
             Activity Details
           </Typography>
           <Typography>Type : {activity.activityType}</Typography>
-          <Typography>Duration : {activity.duration} minutes</Typography>
-          <Typography>Calories Burned : {activity.caloriesBurned}</Typography>
           <Typography>
             Date: {new Date(activity.createdAt).toLocaleString()}
           </Typography>
